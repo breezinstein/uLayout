@@ -118,7 +118,6 @@ namespace Poke.UI
             if(transform.childCount != _children.Count || _refreshCache) {
                 RefreshChildCache();
                 _refreshCache = false;
-                _root?.MarkDirty();
             }
             
             // check if any children were disabled this frame
