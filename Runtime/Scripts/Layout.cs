@@ -667,6 +667,27 @@ namespace Poke.UI
                     }
                 }
             }
+            _root?.MarkDirty();
+        }
+
+        public void MarkDirty() {
+            _root?.MarkDirty();
+        }
+
+        // Called when Inspector values change in the editor
+        private void OnValidate() {
+            _root?.MarkDirty();
+        }
+
+        // Called when RectTransform dimensions change (size, anchors, etc.)
+        protected override void OnRectTransformDimensionsChange() {
+            base.OnRectTransformDimensionsChange();
+            
+            // For top-level layouts (no parent), base class does nothing,
+            // so we need to mark root dirty directly
+            if(_parent == null) {
+                _root?.MarkDirty();
+            }
         }
     }
 }

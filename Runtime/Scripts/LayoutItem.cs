@@ -77,5 +77,15 @@ namespace Poke.UI
                 _rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _parentRect.rect.size.y);
             }
         }
+
+        // Called when Inspector values change in the editor
+        private void OnValidate() {
+            _parent?.MarkDirty();
+        }
+
+        // Called when RectTransform dimensions change (size, anchors, etc.)
+        protected virtual void OnRectTransformDimensionsChange() {
+            _parent?.MarkDirty();
+        }
     }
 }

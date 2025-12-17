@@ -22,13 +22,14 @@ namespace Poke.UI
     ]
     public class LayoutRoot : MonoBehaviour
     {
-        [SerializeField] private int m_tickRate = 60;
+        [SerializeField] private int m_tickRate = 10;
         
         private readonly SortedBucket<Layout, int, Layout> _layouts = new (l => l, l => l.GetInstanceID());
         private readonly Stack<Layout> _reverse = new ();
         private float _tickInterval;
         private float _lastTickTimestamp;
         private bool _tick;
+        private bool _isDirty = true;
         
         private void Awake() {
             _tickInterval = 1.0f / m_tickRate;
@@ -45,8 +46,12 @@ namespace Poke.UI
             }
         }
 
+        public void MarkDirty() {
+            _isDirty = true;
+        }
+
         public void LateUpdate() {
-            if(_tick) {
+            if(_tick || _isDirty) {
                 _reverse.Clear();
                 
                 // fit sizing pass (0)
@@ -70,6 +75,7 @@ namespace Poke.UI
 
                 _lastTickTimestamp = Time.unscaledTime;
                 _tick = false;
+                _isDirty = false;
             }
         }
 
