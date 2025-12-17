@@ -679,7 +679,13 @@ namespace Poke.UI
         }
 
         protected override void OnRectTransformDimensionsChange() {
-            _root?.MarkDirty();
+            base.OnRectTransformDimensionsChange();
+            
+            // For top-level layouts (no parent), base class does nothing,
+            // so we need to mark root dirty directly
+            if(_parent == null) {
+                _root?.MarkDirty();
+            }
         }
     }
 }
