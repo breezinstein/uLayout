@@ -33,6 +33,7 @@ namespace Poke.UI
                 m_ignoreLayout = value;
                 if(_parent) {
                     _parent.RefreshChildCache();
+                    _parent.MarkDirty();
                 }
             }
         }
@@ -59,12 +60,14 @@ namespace Poke.UI
             _parent = transform.parent.GetComponent<Layout>();
             if(_parent) {
                 _parent.RefreshChildCache();
+                _parent.MarkDirty();
             }
         }
 
         protected virtual void OnDisable() {
             if(_parent) {
                 _parent.RefreshChildCache();
+                _parent.MarkDirty();
             }
         }
 
@@ -76,6 +79,14 @@ namespace Poke.UI
             if(!_parent && m_sizing.y == SizingMode.Grow) {
                 _rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _parentRect.rect.size.y);
             }
+        }
+
+        private void OnValidate() {
+            _parent?.MarkDirty();
+        }
+
+        protected virtual void OnRectTransformDimensionsChange() {
+            _parent?.MarkDirty();
         }
     }
 }

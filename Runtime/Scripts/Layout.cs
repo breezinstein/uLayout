@@ -118,6 +118,7 @@ namespace Poke.UI
             if(transform.childCount != _children.Count || _refreshCache) {
                 RefreshChildCache();
                 _refreshCache = false;
+                _root?.MarkDirty();
             }
             
             // check if any children were disabled this frame
@@ -667,6 +668,20 @@ namespace Poke.UI
                     }
                 }
             }
+            _root?.MarkDirty();
+        }
+
+        public void MarkDirty() {
+            _root?.MarkDirty();
+        }
+
+        private void OnValidate() {
+            _root?.MarkDirty();
+        }
+
+        protected override void OnRectTransformDimensionsChange() {
+            base.OnRectTransformDimensionsChange();
+            _root?.MarkDirty();
         }
     }
 }
