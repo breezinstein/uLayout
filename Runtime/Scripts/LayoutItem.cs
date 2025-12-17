@@ -78,10 +78,12 @@ namespace Poke.UI
             }
         }
 
+        // Called when Inspector values change in the editor
         private void OnValidate() {
             _parent?.MarkDirty();
         }
 
+        // Called when RectTransform dimensions change (size, anchors, etc.)
         protected virtual void OnRectTransformDimensionsChange() {
             _parent?.MarkDirty();
         }

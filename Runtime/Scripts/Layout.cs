@@ -674,10 +674,12 @@ namespace Poke.UI
             _root?.MarkDirty();
         }
 
+        // Called when Inspector values change in the editor
         private void OnValidate() {
             _root?.MarkDirty();
         }
 
+        // Called when RectTransform dimensions change (size, anchors, etc.)
         protected override void OnRectTransformDimensionsChange() {
             base.OnRectTransformDimensionsChange();
             
