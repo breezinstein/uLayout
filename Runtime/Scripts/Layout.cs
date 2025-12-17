@@ -679,7 +679,6 @@ namespace Poke.UI
         }
 
         protected override void OnRectTransformDimensionsChange() {
-            base.OnRectTransformDimensionsChange();
             _root?.MarkDirty();
         }
     }
