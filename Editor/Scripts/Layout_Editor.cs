@@ -57,7 +57,6 @@ namespace Poke.UI
             );
             if(GUILayout.Button("Refresh Child Cache")) {
                 _layout.RefreshChildCache();
-                _layout.MarkDirty();
                 EditorApplication.QueuePlayerLoopUpdate();
             }
         }

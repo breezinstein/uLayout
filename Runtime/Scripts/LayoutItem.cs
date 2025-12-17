@@ -33,7 +33,6 @@ namespace Poke.UI
                 m_ignoreLayout = value;
                 if(_parent) {
                     _parent.RefreshChildCache();
-                    _parent.MarkDirty();
                 }
             }
         }
@@ -60,14 +59,12 @@ namespace Poke.UI
             _parent = transform.parent.GetComponent<Layout>();
             if(_parent) {
                 _parent.RefreshChildCache();
-                _parent.MarkDirty();
             }
         }
 
         protected virtual void OnDisable() {
             if(_parent) {
                 _parent.RefreshChildCache();
-                _parent.MarkDirty();
             }
         }
 
